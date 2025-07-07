@@ -145,6 +145,12 @@ lazy val rocketchip = freshProject("rocketchip", rocketChipDir)
   )
 lazy val rocketLibDeps = (rocketchip / Keys.libraryDependencies)
 
+//Stuff I added
+// Adding vcodeRocc
+lazy val roccacc = (project in file("generators/rocc-acc"))
+  .dependsOn(rocketchip)
+  .settings(commonSettings)
+// Stuff I added
 
 // -- Chipyard-managed External Projects --
 
@@ -158,7 +164,7 @@ lazy val chipyard = (project in file("generators/chipyard"))
     dsptools, rocket_dsp_utils,
     radiance, gemmini, icenet, tracegen, cva6, nvdla, sodor, ibex, fft_generator,
     constellation, mempress, barf, shuttle, caliptra_aes, rerocc,
-    compressacc, saturn, ara, firrtl2_bridge, vexiiriscv, tacit, vcodeRocc) // Added vcodeRocc
+    compressacc, saturn, ara, firrtl2_bridge, vexiiriscv, tacit, roccacc) // Added RoccAcc
   .settings(libraryDependencies ++= rocketLibDeps.value)
   .settings(
     libraryDependencies ++= Seq(
@@ -425,8 +431,4 @@ lazy val firechip = (project in file("generators/firechip/chip"))
   )
   .settings(scalaTestSettings)
 
-// Adding vcodeRocc
-lazy val vcodeRocc = (project in file("generators/vcode-rocc"))
-  .dependsOn(rocketchip)
-  .settings(commonSettings)
   
