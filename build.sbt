@@ -149,6 +149,7 @@ lazy val rocketLibDeps = (rocketchip / Keys.libraryDependencies)
 // Adding vcodeRocc
 lazy val roccacc = (project in file("generators/rocc-acc"))
   .dependsOn(rocketchip)
+  .settings(libraryDependencies ++= rocketLibDeps.value)
   .settings(commonSettings)
 // Stuff I added
 
