@@ -148,9 +148,18 @@ lazy val rocketLibDeps = (rocketchip / Keys.libraryDependencies)
 //Stuff I added
 // Adding vcodeRocc
 lazy val roccacc = (project in file("generators/rocc-acc"))
-  .dependsOn(rocketchip)
+  .dependsOn(rocketchip, cde)
+  //.dependsOn(rocketchip)
   .settings(libraryDependencies ++= rocketLibDeps.value)
   .settings(commonSettings)
+  .settings(chiselSettings)  // Add this - provides Chisel 6
+  .settings(scalaTestSettings)
+  .settings(libraryDependencies ++= Seq(
+      "org.scalatest" %% "scalatest" % "3.2.+" % "test",
+      "junit" % "junit" % "4.13" % "test",
+      "org.scalacheck" %% "scalacheck" % "1.14.3" % "test",
+  ))
+  
 // Stuff I added
 
 // -- Chipyard-managed External Projects --
